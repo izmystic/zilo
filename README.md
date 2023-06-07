@@ -1,5 +1,5 @@
 # mystic-bot
-WIP multipurpose discord bot written in node.js
+WIP multipurpose discord bot written in discord.js
 
 # how to install
 * make a copy of `config.sample.js` and rename it to `config.js`

@@ -5,7 +5,7 @@ module.exports = {
         .setName('say')
         .setDescription('Say a message as a bot')
         .addStringOption(option => option.setName('message').setDescription('Message for the bot to sayt'))
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
     async execute(interaction) {
         let message = interaction.options.getString('message')
         if (!message) {

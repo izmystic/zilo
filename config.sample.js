@@ -3,11 +3,10 @@ const config = {
     mongoURi: '', // mongo uri
 
     clientID: '', // discord client id
-    guildID: '', // discord guild id
 
     embed: {
-        color: '#00f8bb', // embed color
-        footer: '2022 Omni' // embed footer
+        color: '#ff00ff', // embed color
+        footer: '2023 izDevelopment' // embed footer
     },
 }
 

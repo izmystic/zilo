@@ -5,8 +5,8 @@ const config = {
     clientID: '', // discord client id
 
     embed: {
-        color: '#ff00ff', // embed color
-        footer: '2023 izDevelopment' // embed footer
+        color: '#c6a129', // embed color
+        footer: 'Zilo' // embed footer
     },
 }
 

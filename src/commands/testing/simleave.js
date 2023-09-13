@@ -2,13 +2,13 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('simjoin')
-    .setDescription('Simulate a user join.'),
+    .setName('simleave')
+    .setDescription('Simulate a user leave.'),
   async execute(interaction, client) {
     const member = interaction.member
-    client.emit('guildMemberAdd', member)
+    client.emit('guildMemberRemove', member)
     const joinSim = new EmbedBuilder()
-      .setDescription('Join Simulated')
+      .setDescription('Leave Simulated')
       .setColor(client.config.embed.color)
 
     await interaction.reply({ embeds: [joinSim] })

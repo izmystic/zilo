@@ -1,24 +1,81 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+const { timeoutTarget } = require("@helpers/ModUtils");
+const { ApplicationCommandOptionType } = require("discord.js");
+const ems = require("enhanced-ms");
 
+/**
+ * @type {import("@structures/Command")}
+ */
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('timeout')
-    .setDescription('Timeouts a user')
-    .addUserOption(option => option.setName('user').setRequired(true).setDescription('The user to timeout'))
-    .addNumberOption(option => option.setName('duration').setRequired(true).setDescription('Duration to timeout the user for '))
-    .addStringOption(option => option.setName('reason').setDescription('Reason to timeout the user'))
-    .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
-  async execute(interaction) {
-    const timeoutUser = interaction.options.getMember('user')
-    const timeoutDuration = interaction.options.getNumber('duration')
-    let timeoutReason = interaction.options.getString('reason')
+    name: "timeout",
+    description: "timeouts the specified member",
+    category: "MODERATION",
+    botPermissions: ["ModerateMembers"],
+    userPermissions: ["ModerateMembers"],
+    command: {
+        enabled: true,
+        aliases: ["mute"],
+        usage: "<ID|@member> <duration> [reason]",
+        minArgsCount: 2,
+    },
+    slashCommand: {
+        enabled: true,
+        options: [
+            {
+                name: "user",
+                description: "the target member",
+                type: ApplicationCommandOptionType.User,
+                required: true,
+            },
+            {
+                name: "duration",
+                description: "the time to timeout the member for",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: "reason",
+                description: "reason for timeout",
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+        ],
+    },
 
-    if (!timeoutUser) await interaction.reply({ content: 'User not found', ephemeral: true })
-    if (!timeoutDuration) await interaction.reply({ content: 'Duration provided is not a valid number', ephemeral: true })
-    if (!timeoutReason) timeoutReason = 'No reason provided'
+    async messageRun(message, args) {
+        const target = await message.guild.resolveMember(args[0], true);
+        if (!target) return message.safeReply(`No user found matching ${args[0]}`);
 
-    timeoutUser.timeout(timeoutDuration * 60 * 1000, timeoutReason)
+        // parse time
+        const ms = ems(args[1]);
+        if (!ms) return message.safeReply("Please provide a valid duration. Example: 1d/1h/1m/1s");
 
-    await interaction.reply({ content: `<@${timeoutUser.id}> (${timeoutUser.user.tag}) has been timedout.`, ephemeral: true })
-  }
+        const reason = args.slice(2).join(" ").trim();
+        const response = await timeout(message.member, target, ms, reason);
+        await message.safeReply(response);
+    },
+
+    async interactionRun(interaction) {
+        const user = interaction.options.getUser("user");
+
+        // parse time
+        const duration = interaction.options.getString("duration");
+        const ms = ems(duration);
+        if (!ms) return interaction.followUp("Please provide a valid duration. Example: 1d/1h/1m/1s");
+
+        const reason = interaction.options.getString("reason");
+        const target = await interaction.guild.members.fetch(user.id);
+
+        const response = await timeout(interaction.member, target, ms, reason);
+        await interaction.followUp(response);
+    },
+};
+
+async function timeout(issuer, target, ms, reason) {
+    if (isNaN(ms)) return "Please provide a valid duration. Example: 1d/1h/1m/1s";
+    const response = await timeoutTarget(issuer, target, ms, reason);
+    if (typeof response === "boolean") return `${target.user.username} is timed out!`;
+    if (response === "BOT_PERM") return `I do not have permission to timeout ${target.user.username}`;
+    else if (response === "MEMBER_PERM") return `You do not have permission to timeout ${target.user.username}`;
+    else if (response === "ALREADY_TIMEOUT") return `${target.user.username} is already timed out!`;
+    else return `Failed to timeout ${target.user.username}`;
 }

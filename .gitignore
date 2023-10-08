@@ -8,5 +8,8 @@ node_modules
 # environment variables
 .env
 
+# config file
+config.js
+
 # package lock
 package-lock.json

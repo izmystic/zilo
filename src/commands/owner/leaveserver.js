@@ -12,7 +12,7 @@ module.exports = {
         usage: "<serverId>",
     },
     slashCommand: {
-        enabled: true,
+        enabled: false,
     },
 
     async messageRun(message, args, data) {

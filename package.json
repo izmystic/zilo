@@ -36,6 +36,7 @@
     "mongoose": "^7.5.3",
     "nekos.life": "^3.0.0",
     "node-fetch": "^2.7.0",
+    "nodemon": "^3.0.1",
     "pino": "^8.15.3",
     "pino-pretty": "^10.2.0",
     "pretty-ms": "^7.0.1",

@@ -1,5 +1,5 @@
 # zilo
-A cool multipurpose discord bot which can serve all your needs
+An all in one Discord Bot with auto-moderation, administration, music, and more!
 
 ## website 
 https://zilobot.xyz

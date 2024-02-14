@@ -7,54 +7,54 @@ const { stripIndent } = require("common-tags");
  * @type {import("@structures/Command")}
  */
 module.exports = {
-    name: "pokedex",
-    description: "shows pokemon information",
-    category: "UTILITY",
-    botPermissions: ["EmbedLinks"],
-    cooldown: 5,
-    command: {
-        enabled: true,
-        usage: "<pokemon>",
-        minArgsCount: 1,
-    },
-    slashCommand: {
-        enabled: true,
-        options: [
-            {
-                name: "pokemon",
-                description: "pokemon name to get information for",
-                type: ApplicationCommandOptionType.String,
-                required: true,
-            },
-        ],
-    },
+  name: "pokedex",
+  description: "shows pokemon information",
+  category: "UTILITY",
+  botPermissions: ["EmbedLinks"],
+  cooldown: 5,
+  command: {
+    enabled: true,
+    usage: "<pokemon>",
+    minArgsCount: 1,
+  },
+  slashCommand: {
+    enabled: true,
+    options: [
+      {
+        name: "pokemon",
+        description: "pokemon name to get information for",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
 
-    async messageRun(message, args) {
-        const pokemon = args.join(" ");
-        const response = await pokedex(pokemon);
-        await message.safeReply(response);
-    },
+  async messageRun(message, args) {
+    const pokemon = args.join(" ");
+    const response = await pokedex(pokemon);
+    await message.safeReply(response);
+  },
 
-    async interactionRun(interaction) {
-        const pokemon = interaction.options.getString("pokemon");
-        const response = await pokedex(pokemon);
-        await interaction.followUp(response);
-    },
+  async interactionRun(interaction) {
+    const pokemon = interaction.options.getString("pokemon");
+    const response = await pokedex(pokemon);
+    await interaction.followUp(response);
+  },
 };
 
 async function pokedex(pokemon) {
-    const response = await getJson(`https://pokeapi.glitch.me/v1/pokemon/${pokemon}`);
-    if (response.status === 404) return "```The given pokemon is not found```";
-    if (!response.success) return MESSAGES.API_ERROR;
+  const response = await getJson(`https://pokeapi.glitch.me/v1/pokemon/${pokemon}`);
+  if (response.status === 404) return "```The given pokemon is not found```";
+  if (!response.success) return MESSAGES.API_ERROR;
 
-    const json = response.data[0];
+  const json = response.data[0];
 
-    const embed = new EmbedBuilder()
-        .setTitle(`Pokédex - ${json.name}`)
-        .setColor(EMBED_COLORS.BOT_EMBED)
-        .setThumbnail(json.sprite)
-        .setDescription(
-            stripIndent`
+  const embed = new EmbedBuilder()
+    .setTitle(`Pokédex - ${json.name}`)
+    .setColor(EMBED_COLORS.BOT_EMBED)
+    .setThumbnail(json.sprite)
+    .setDescription(
+      stripIndent`
             ♢ **ID**: ${json.number}
             ♢ **Name**: ${json.name}
             ♢ **Species**: ${json.species}
@@ -72,8 +72,8 @@ async function pokedex(pokemon) {
             ♢ **Is Mythical?**: ${json.mythical}
             ♢ **Is Generation?**: ${json.gen}
             `
-        )
-        .setFooter({ text: json.description });
+    )
+    .setFooter({ text: json.description });
 
-    return { embeds: [embed] };
+  return { embeds: [embed] };
 }

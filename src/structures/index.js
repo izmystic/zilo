@@ -4,8 +4,8 @@ const CommandCategory = require("./CommandCategory");
 const BaseContext = require("./BaseContext");
 
 module.exports = {
-    BaseContext,
-    BotClient,
-    Command,
-    CommandCategory,
+  BaseContext,
+  BotClient,
+  Command,
+  CommandCategory,
 };

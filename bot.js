@@ -22,9 +22,9 @@ client.loadEvents("src/events");
 process.on("unhandledRejection", (err) => client.logger.error(`Unhandled exception`, err));
 
 (async () => {
-    // initialize the database
-    await initializeMongoose();
+  // initialize the database
+  await initializeMongoose();
 
-    // start the client
-    await client.login(process.env.BOT_TOKEN);
+  // start the client
+  await client.login(process.env.BOT_TOKEN);
 })();

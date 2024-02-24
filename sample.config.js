@@ -12,11 +12,11 @@ module.exports = {
     TEST_GUILD_ID: "xxxxxxxxxxx", // testing guild id (test commands here first)
   },
   EMBED_COLORS: {
-    BOT_EMBED: "#068ADD", // general bot embed color
+    BOT_EMBED: "#c6a129", // general bot embed color
     TRANSPARENT: "#36393F", // invisible embed color
-    SUCCESS: "#00A56A", // success embed color
-    ERROR: "#D61A3C", // error embed color
-    WARNING: "#F7E919", // warning embed color
+    SUCCESS: "#37b24d", // success embed color
+    ERROR: "#f03e3e", // error embed color
+    WARNING: "#f59f00", // warning embed color
   },
   CACHE_SIZE: {
     GUILDS: 100,
@@ -31,8 +31,8 @@ module.exports = {
 
   AUTOMOD: {
     ENABLED: true, // enable/disable automod
-    LOG_EMBED: "#36393F", // log embed color
-    DM_EMBED: "#36393F", // dm embed color
+    LOG_EMBED: "#36393f", // log embed color
+    DM_EMBED: "#36393f", // dm embed color
   },
 
   ECONOMY: {
@@ -63,13 +63,13 @@ module.exports = {
   GIVEAWAYS: {
     ENABLED: true, // enable/disable giveaways
     REACTION: "🎁", // giveaway reaction emoji
-    START_EMBED: "#FF468A", // giveaway start embed color
-    END_EMBED: "#FF468A", // giveaway end embed color
+    START_EMBED: "#ff468a", // giveaway start embed color
+    END_EMBED: "#ff468a", // giveaway end embed color
   },
 
   IMAGE: {
-    ENABLED: true, // enable/discord image manipulation
-    BASE_API: "https://strangeapi.fun/api", // api link
+    ENABLED: true, // enable/disable image manipulation
+    BASE_API: "https://strangeapi.hostz.me/api", // api link
   },
 
   INVITE: {
@@ -80,15 +80,15 @@ module.exports = {
     ENABLED: true, // enable/disable moderation
     EMBED_COLORS: {
       TIMEOUT: "#102027", // timeout embed color
-      UNTIMEOUT: "#4B636E", // untimeout embed color
-      KICK: "#FF7961", // kick embed color
-      SOFTBAN: "#AF4448", // softban embed color
-      BAN: "#D32F2F", // ban embed color
+      UNTIMEOUT: "#4b636e", // untimeout embed color
+      KICK: "#ff7961", // kick embed color
+      SOFTBAN: "#af4448", // softban embed color
+      BAN: "#d32f2f", // ban embed color
       UNBAN: "#00C853", // unban embed color
       VMUTE: "#102027", // vmute embed color
-      VUNMUTE: "#4B636E", // vunmute embed color
+      VUNMUTE: "#4b636e", // vunmute embed color
       DEAFEN: "#102027", // deafen embed color
-      UNDEAFEN: "#4B636E", // undeafen embed color
+      UNDEAFEN: "#4b636e", // undeafen embed color
       DISCONNECT: "RANDOM", // disconnect embed color
       MOVE: "RANDOM", // move embed color
     },
@@ -113,14 +113,14 @@ module.exports = {
       UP_VOTE: "⬆️", // upvote emoji
       DOWN_VOTE: "⬇️", // downvote emoji
     },
-    DEFAULT_EMBED: "#4F545C", // default suggestion embed
-    APPROVED_EMBED: "#43B581", // approved suggestion embed
-    DENIED_EMBED: "#F04747", // denied suggestion embed
+    DEFAULT_EMBED: "#4f545c", // default suggestion embed
+    APPROVED_EMBED: "#43b581", // approved suggestion embed
+    DENIED_EMBED: "#f04747", // denied suggestion embed
   },
 
   TICKET: {
     ENABLED: true, // enable/disable ticket system
-    CREATE_EMBED: "#068ADD", // create ticket embed color
-    CLOSE_EMBED: "#068ADD", // close ticket embed color
+    CREATE_EMBED: "#068add", // create ticket embed color
+    CLOSE_EMBED: "#068add", // close ticket embed color
   },
 };

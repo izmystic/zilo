@@ -47,15 +47,15 @@ module.exports = {
 
   async interactionRun(interaction) {
     const input = interaction.options.getString("serverid");
-    const guild = message.client.guilds.cache.get(input);
+    const guild = interaction.client.guilds.cache.get(input);
 
     const name = guild.name;
     try {
       await guild.leave();
-      return message.safeReply(`Successfully Left \`${name}\``);
+      return interaction.followUp(`Successfully Left \`${name}\``);
     } catch (err) {
-      message.client.logger.error("GuildLeave", err);
-      return message.safeReply(`Failed to leave \`${name}\``);
+      interaction.client.logger.error("GuildLeave", err);
+      return interaction.followUp(`Failed to leave \`${name}\``);
     }
   },
 };

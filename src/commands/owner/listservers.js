@@ -131,21 +131,19 @@ module.exports = {
   },
 
   async interactionRun(interaction) {
-    const { client, channel, member } = message;
-
     const matched = [];
     const match = interaction.options.getString("match");
     if (match) {
       // match by id
-      if (client.guilds.cache.has(match)) {
-        matched.push(client.guilds.cache.get(match));
+      if (interaction.client.guilds.cache.has(match)) {
+        matched.push(interaction.client.guilds.cache.get(match));
       }
 
       // match by name
-      client.guilds.cache.filter((g) => g.name.toLowerCase().includes(match.toLowerCase())).forEach((g) => matched.push(g));
+      interaction.client.guilds.cache.filter((g) => g.name.toLowerCase().includes(match.toLowerCase())).forEach((g) => matched.push(g));
     }
 
-    const servers = match ? matched : Array.from(client.guilds.cache.values());
+    const servers = match ? matched : Array.from(interaction.client.guilds.cache.values());
     const total = servers.length;
     const maxPerPage = MAX_PER_PAGE;
     const totalPages = Math.ceil(total / maxPerPage);
@@ -171,7 +169,7 @@ module.exports = {
       const end = start + maxPerPage < total ? start + maxPerPage : total;
 
       const embed = new EmbedBuilder()
-        .setColor(client.config.EMBED_COLORS.BOT_EMBED)
+        .setColor(interaction.client.config.EMBED_COLORS.BOT_EMBED)
         .setAuthor({ name: "List of servers" })
         .setFooter({ text: `${match ? "Matched" : "Total"} Servers: ${total} • Page ${currentPage} of ${totalPages}` });
 
@@ -194,11 +192,11 @@ module.exports = {
 
     // Send Message
     const embed = buildEmbed();
-    const sentMsg = await channel.send({ embeds: [embed], components: [buttonsRow] });
+    const sentMsg = await interaction.channel.send({ embeds: [embed], components: [buttonsRow] });
 
     // Listeners
-    const collector = channel.createMessageComponentCollector({
-      filter: (reaction) => reaction.user.id === member.id && reaction.message.id === sentMsg.id,
+    const collector = interaction.channel.createMessageComponentCollector({
+      filter: (reaction) => reaction.user.id === interaction.member.id && reaction.message.id === sentMsg.id,
       idle: IDLE_TIMEOUT * 1000,
       dispose: true,
       componentType: ComponentType.Button,

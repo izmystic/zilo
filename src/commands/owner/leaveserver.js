@@ -19,7 +19,7 @@ module.exports = {
       {
         name: "serverid",
         description: "server id to leave",
-        type: ApplicationCommandOptionType.Integer,
+        type: ApplicationCommandOptionType.String,
         required: true,
       },
     ],
@@ -44,8 +44,9 @@ module.exports = {
       return message.safeReply(`Failed to leave \`${name}\``);
     }
   },
+
   async interactionRun(interaction) {
-    const input = interaction.options.getInteger("serverid");
+    const input = interaction.options.getString("serverid");
     const guild = message.client.guilds.cache.get(input);
 
     const name = guild.name;

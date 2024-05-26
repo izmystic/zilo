@@ -22,7 +22,7 @@ module.exports = {
         {
           name: "match",
           description: "server id to match",
-          type: ApplicationCommandOptionType.Integer,
+          type: ApplicationCommandOptionType.String,
           required: false,
         },
       ],
@@ -134,7 +134,7 @@ module.exports = {
     const { client, channel, member } = message;
 
     const matched = [];
-    const match = interaction.options.getInteger("match");
+    const match = interaction.options.getString("match");
     if (match) {
       // match by id
       if (client.guilds.cache.has(match)) {

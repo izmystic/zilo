@@ -130,7 +130,7 @@ module.exports = {
     });
   },
 
-  async interactionRun(message, args) {
+  async interactionRun(interaction) {
     const { client, channel, member } = message;
 
     const matched = [];

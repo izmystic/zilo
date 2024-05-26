@@ -1,4 +1,4 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType, ApplicationCommandOptionType } = require("discord.js");
 
 const IDLE_TIMEOUT = 30; // in seconds
 const MAX_PER_PAGE = 10; // max number of embed fields per page
@@ -18,6 +18,14 @@ module.exports = {
   },
   slashCommand: {
     enabled: true,
+    options: [
+        {
+          name: "match",
+          description: "server id to match",
+          type: ApplicationCommandOptionType.Integer,
+          required: false,
+        },
+      ],
   },
 
   async messageRun(message, args) {
@@ -126,7 +134,7 @@ module.exports = {
     const { client, channel, member } = message;
 
     const matched = [];
-    const match = args.join(" ") || null;
+    const match = interaction.options.getInteger("match");
     if (match) {
       // match by id
       if (client.guilds.cache.has(match)) {

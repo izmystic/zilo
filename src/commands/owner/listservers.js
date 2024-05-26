@@ -17,7 +17,7 @@ module.exports = {
     usage: "[match]",
   },
   slashCommand: {
-    enabled: false,
+    enabled: true,
   },
 
   async messageRun(message, args) {

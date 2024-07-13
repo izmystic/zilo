@@ -1,9 +1,17 @@
-import {Client, Events, GatewayIntentBits} from 'discord.js';
+import { Client, GatewayIntentBits } from "discord.js";
+import { CommandKit } from "commandkit";
+import path from "path";
 
-const client = new Client({intents: [GatewayIntentBits.Guilds]});
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-client.once(Events.ClientReady, (c) => {
-    console.log(`Ready! Logged in as ${c.user.tag}.`)
+new CommandKit({
+  client,
+  commandsPath: path.join(__dirname, "commands"),
+  eventsPath: path.join(__dirname, "events"),
+  devGuildIds: ["1157101410710736946"],
+  devUserIds: ["680957940647329829", "739219467455823921"],
+  skipBuiltInValidations: true,
+  bulkRegister: true,
 });
 
-client.login(process.env.BOT_TOKEN)
+client.login(process.env.DISCORD_TOKEN);

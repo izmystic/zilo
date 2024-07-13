@@ -1,29 +1,29 @@
 {
-  "compilerOptions": {
-    // Enable latest features
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "allowJs": true,
-
-    // Bundler mode
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
-
-    // Best practices
-    "strict": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-
-    // Some stricter flags (disabled by default)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "target": "ES6", // Target ECMAScript version
+        "module": "commonjs", // Module system
+        "strict": true, // Enable strict type-checking options
+        "esModuleInterop": true, // Enable compatibility with CommonJS and ES Modules
+        "skipLibCheck": true, // Skip type checking of declaration files
+        "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+        "outDir": "./dist", // Output directory for compiled files
+        "rootDir": "./src", // Root directory of source files
+        "resolveJsonModule": true, // Support importing JSON modules
+        "baseUrl": ".", // Base directory for non-relative module names
+        "paths": {
+            "@src/*": [
+                "src/*"
+            ], // Alias for the src directory
+            "@utils/*": [
+                "src/utils/*"
+            ] // Alias for a utils directory
+        }
+    },
+    "include": [
+        "src/**/*.ts" // Include all TypeScript files in the src directory
+    ],
+    "exclude": [
+        "node_modules", // Exclude node_modules from compilation
+        "**/*.test.ts" // Optionally exclude test files
+    ]
 }

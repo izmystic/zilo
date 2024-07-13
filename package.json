@@ -1,0 +1,16 @@
+{
+  "name": "zilo",
+  "module": "dist/index.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.14.10",
+    "tsx": "^4.16.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3"
+  }
+}

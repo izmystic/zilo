@@ -3,7 +3,9 @@
   "module": "dist/index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun src/index.ts"
+    "dev": "bun --hot src/index.ts",
+    "build": "tsc",
+    "start": "bun ."
   },
   "devDependencies": {
     "@types/bun": "latest",

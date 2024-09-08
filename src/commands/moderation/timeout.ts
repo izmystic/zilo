@@ -1,17 +1,17 @@
 import type { CommandData, SlashCommandProps, CommandOptions } from "commandkit";
 
 export const data: CommandData = {
-  name: "ping",
-  description: "Pong!",
+  name: "timeout",
+  description: "applies a timeout to the specified member",
 };
 
 export const options: CommandOptions = {
   devOnly: true,
-  userPermissions: ["Administrator", "AddReactions"],
-  botPermissions: ["Administrator", "AddReactions"],
+  userPermissions: ["ModerateMembers"],
+  botPermissions: ["ModerateMembers"],
   deleted: false,
 };
 
 export function run({ interaction, client, handler }: SlashCommandProps) {
-  interaction.reply({ content: `:ping_pong: Pong! ${interaction.client.ws.ping}ms` });
+  interaction.reply({ content: "WIP, doesn't work", ephemeral: true });
 }

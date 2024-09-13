@@ -45,17 +45,28 @@ module.exports = {
 
   MUSIC: {
     ENABLED: true, // enable/disable music system
-    IDLE_TIME: 60, // seconds before bot disconnects from an idle voice channel
+    IDLE_TIME: 120, // seconds before bot disconnects from an idle voice channel
     MAX_SEARCH_RESULTS: 5, // maximum search results
-    DEFAULT_SOURCE: "SC", // YT = youtube, YTM = youtube music, SC = sound cloud
+    DEFAULT_VOLUME: 60, // default volume for the music player
+    DEFAULT_SOURCE: "scsearch", // ytsearch = Youtube, ytmsearch = Youtube Music, spsearch = Spotify, scsearch = SoundCloud
+    // Lavalink WebSocket configuration
+    LAVALINK_WS: {
+      clientName: "ZiloBot", // client name
+      resuming: true, // lavalink resume session when reconnecting
+      reconnecting: {
+        trues: Infinity, // number of reconnect attempts
+        delay: 20000, // delay between reconnect attempts
+      },
+    },
     // add lavalink nodes here, https://github.com/freyacodes/Lavalink
     LAVALINK_NODES: [
       {
-        host: "localhost",
-        port: 2333,
-        password: "youshallnotpass",
-        id: "Local Node",
-        secure: false,
+        info: {
+          host: "localhost",
+          auth: "youshallnotpass",
+          port: 2333,
+        },
+        identifier: "Local Node",
       },
     ],
   },

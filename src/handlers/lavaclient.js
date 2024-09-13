@@ -44,7 +44,7 @@ module.exports = (client) => {
       .setFooter({ text: `Requested By: ${track.requesterId}` })
       .setThumbnail(track.info.artworkUrl);
 
-    if (song.sourceName === "youtube") {
+    if (track.sourceName === "youtube") {
       const identifier = song.identifier;
       const thumbnail = `https://img.youtube.com/vi/${identifier}/hqdefault.jpg`;
       embed.setThumbnail(thumbnail);
